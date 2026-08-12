@@ -1,150 +1,84 @@
-import BackButton from "../components/common/BackButton";
-import { company } from "../data/company";
-import { services } from "../data/services";
-import "../styles/pages/quote.css";
 import { useState } from "react";
-
-const INITIAL = {
-  name: "", phone: "", email: "", company: "",
-  service: "", message: "", consent: false, _honey: "",
-};
+import { useSEO } from "../hooks/useSEO";
+import { company } from "../data/company";
+import { buildWhatsAppUrl } from "../utils/whatsapp";
+import BackButton from "../components/common/BackButton";
+import "../styles/pages/get-quote.css";
 
 export default function GetQuote() {
-  const [form, setForm] = useState(INITIAL);
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
-  const [errors, setErrors] = useState({});
+  useSEO(
+    "Get a Free Quote",
+    "Request a free quote from Bhavani Enterprises for CCTV installation, networking, biometric access control, or AMC services in Navi Mumbai, Panvel, and Kharghar."
+  );
 
-  const validate = () => {
-    const e = {};
-    if (!form.name.trim()) e.name = "Name is required.";
-    if (!form.phone.trim()) e.phone = "Phone number is required.";
-    if (!form.email.trim()) e.email = "Email is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email.";
-    if (!form.service) e.service = "Please select a service.";
-    if (!form.consent) e.consent = "Please accept to continue.";
-    return e;
-  };
+  const [form, setForm] = useState({ name: "", phone: "", email: "", service: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
-    setErrors((prev) => ({ ...prev, [name]: undefined }));
-  };
+  function handleChange(e) {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  }
 
-  const handleSubmit = async (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
-    if (form._honey) return; // honeypot
-    const errs = validate();
-    if (Object.keys(errs).length) { setErrors(errs); return; }
-    setStatus("loading");
-    try {
-      const data = new FormData();
-      Object.entries(form).forEach(([k, v]) => data.append(k, v));
-      data.append("_subject", `Quote Request from ${form.name}`);
-      data.append("_captcha", "false");
-      const res = await fetch(`https://formsubmit.co/${company.adminEmail}`, {
-        method: "POST", body: data,
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) { setStatus("success"); setForm(INITIAL); }
-      else setStatus("error");
-    } catch { setStatus("error"); }
-  };
+    const msg = `Hi, I would like a quote.%0AName: ${form.name}%0APhone: ${form.phone}%0AEmail: ${form.email}%0AService: ${form.service}%0AMessage: ${form.message}`;
+    window.open(`https://wa.me/${company.whatsapp}?text=${msg}`, "_blank");
+    setSubmitted(true);
+  }
 
   return (
-    <section className="page-section quote-page">
+    <section className="page-section get-quote-page">
       <div className="container">
-        <BackButton fallback="/contact" />
-        <div className="quote-layout">
-          <div className="quote-info">
-            <span className="pill-label">Get a Quote</span>
-            <h1>Request a Free Quote</h1>
-            <p>
-              Fill in your details and we will get back to you with a tailored
-              quote for your security or networking requirement.
-            </p>
-            <ul className="quote-benefits">
-              <li><span aria-hidden="true">&#10003;</span> Free site assessment</li>
-              <li><span aria-hidden="true">&#10003;</span> No obligation quote</li>
-              <li><span aria-hidden="true">&#10003;</span> Fast response within 24 hours</li>
-              <li><span aria-hidden="true">&#10003;</span> Serving Navi Mumbai, Panvel &amp; Kharghar</li>
-            </ul>
-          </div>
-
-          <div className="quote-form-wrap card">
-            {status === "success" ? (
-              <div className="form-success">
-                <span className="form-success__icon" aria-hidden="true">&#10003;</span>
-                <h2>Quote Request Sent!</h2>
-                <p>Thank you, <strong>{form.name || "there"}</strong>. We will contact you within 24 hours.</p>
-                <button className="btn" onClick={() => setStatus("idle")}>Send Another</button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} noValidate aria-label="Get a quote form">
-                {/* Honeypot */}
-                <input type="text" name="_honey" value={form._honey} onChange={handleChange} style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
-
-                <div className="form-row">
-                  <FormField label="Full Name *" error={errors.name}>
-                    <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your full name" autoComplete="name" />
-                  </FormField>
-                  <FormField label="Phone *" error={errors.phone}>
-                    <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="9867933763" autoComplete="tel" />
-                  </FormField>
-                </div>
-
-                <div className="form-row">
-                  <FormField label="Email *" error={errors.email}>
-                    <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@example.com" autoComplete="email" />
-                  </FormField>
-                  <FormField label="Company / Organisation" error={errors.company}>
-                    <input type="text" name="company" value={form.company} onChange={handleChange} placeholder="Optional" autoComplete="organization" />
-                  </FormField>
-                </div>
-
-                <FormField label="Service Required *" error={errors.service}>
-                  <select name="service" value={form.service} onChange={handleChange}>
-                    <option value="">Select a service…</option>
-                    {services.map((s) => <option key={s.id} value={s.title}>{s.title}</option>)}
-                    <option value="Other">Other / Not listed</option>
-                  </select>
-                </FormField>
-
-                <FormField label="Message / Additional Details" error={errors.message}>
-                  <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Describe your requirement, site details, or any questions…" />
-                </FormField>
-
-                <FormField error={errors.consent} className="form-field--checkbox">
-                  <label className="checkbox-label">
-                    <input type="checkbox" name="consent" checked={form.consent} onChange={handleChange} />
-                    I agree to be contacted by Bhavani Enterprises regarding this enquiry.
-                  </label>
-                </FormField>
-
-                {status === "error" && (
-                  <p className="form-error-msg" role="alert">
-                    Something went wrong. Please try again or WhatsApp us directly.
-                  </p>
-                )}
-
-                <button type="submit" className="btn form-submit" disabled={status === "loading"}>
-                  {status === "loading" ? "Sending…" : "Submit Quote Request"}
-                </button>
-              </form>
-            )}
-          </div>
+        <BackButton fallback="/" />
+        <div className="section-heading">
+          <span className="pill-label">Free Quote</span>
+          <h1>Get a Free Quote</h1>
+          <p>Fill in the form below and we&rsquo;ll get back to you within 24 hours with a tailored quote for your security needs.</p>
         </div>
+
+        {submitted ? (
+          <div className="quote-success card">
+            <span aria-hidden="true" style={{ fontSize: "2rem" }}>✅</span>
+            <h2>Thank you, {form.name}!</h2>
+            <p>Your quote request has been sent via WhatsApp. We&rsquo;ll be in touch shortly.</p>
+          </div>
+        ) : (
+          <form className="quote-form card" onSubmit={handleSubmit} noValidate>
+            <div className="form-group">
+              <label htmlFor="name">Full Name <span aria-hidden="true">*</span></label>
+              <input id="name" name="name" type="text" required placeholder="Your full name" value={form.name} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number <span aria-hidden="true">*</span></label>
+              <input id="phone" name="phone" type="tel" required placeholder="+91 98765 43210" value={form.phone} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="service">Service Required</label>
+              <select id="service" name="service" value={form.service} onChange={handleChange}>
+                <option value="">Select a service…</option>
+                <option>CCTV Installation</option>
+                <option>IP Camera Setup</option>
+                <option>Networking</option>
+                <option>Biometric Access Control</option>
+                <option>Video Door Phone</option>
+                <option>EPABX System</option>
+                <option>AMC / Maintenance</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="message">Additional Details</label>
+              <textarea id="message" name="message" rows={4} placeholder="Describe your requirements…" value={form.message} onChange={handleChange} />
+            </div>
+            <button type="submit" className="btn" style={{ width: "100%" }}>
+              &#128172; Send via WhatsApp
+            </button>
+          </form>
+        )}
       </div>
     </section>
-  );
-}
-
-function FormField({ label, error, children, className = "" }) {
-  return (
-    <div className={`form-field ${className}`}>
-      {label && <label className="form-label">{label}</label>}
-      {children}
-      {error && <span className="form-field-error" role="alert">{error}</span>}
-    </div>
   );
 }

@@ -1,71 +1,45 @@
-import BackButton from "../components/common/BackButton";
+import { useSEO } from "../hooks/useSEO";
 import { company } from "../data/company";
-import "../styles/pages/terms.css";
+import BackButton from "../components/common/BackButton";
+import "../styles/pages/legal.css";
 
 export default function Terms() {
+  useSEO(
+    "Terms & Conditions",
+    "Read the terms and conditions for using Bhavani Enterprises' website and engaging our CCTV, networking, and security services."
+  );
+
   return (
-    <section className="page-section">
+    <section className="page-section legal-page">
       <div className="container">
         <BackButton fallback="/" />
-        <article className="legal-page">
+        <div className="section-heading">
+          <span className="pill-label">Legal</span>
           <h1>Terms &amp; Conditions</h1>
-          <span className="legal-updated">Last updated: August 2026</span>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Last updated: January 2025</p>
+        </div>
+        <div className="legal-content card">
+          <h2>1. Acceptance of Terms</h2>
+          <p>By accessing this website, you agree to be bound by these terms and conditions. If you do not agree, please do not use this website.</p>
 
-          <p>
-            By accessing this website or engaging {company.name} for services,
-            you agree to the following terms and conditions.
-          </p>
+          <h2>2. Services</h2>
+          <p>{company.name} provides CCTV installation, networking, biometric access control, and related security services. All service details, pricing, and timelines are confirmed individually via direct communication.</p>
 
-          <h2>Services</h2>
-          <p>
-            {company.name} provides CCTV installation, networking, biometric
-            access control, video door phone, EPABX, and AMC services. All
-            service engagements are subject to a separate written agreement or
-            quotation.
-          </p>
+          <h2>3. Quotations</h2>
+          <p>Quotes provided via this website or WhatsApp are estimates only and are subject to on-site assessment. Final pricing may vary based on site conditions and product availability.</p>
 
-          <h2>Quotations</h2>
-          <p>
-            All quotations provided are valid for 30 days from the date of
-            issue unless stated otherwise. Prices are subject to change
-            depending on site conditions and material costs.
-          </p>
+          <h2>4. Intellectual Property</h2>
+          <p>All content on this website including text, images, and branding is the property of {company.name} and may not be reproduced without written permission.</p>
 
-          <h2>Payments</h2>
-          <p>
-            Payment terms are specified in the project quotation. We do not
-            process any online payments through this website. All transactions
-            are handled directly between the client and {company.name}.
-          </p>
+          <h2>5. Limitation of Liability</h2>
+          <p>{company.name} shall not be liable for any indirect or consequential loss arising from use of this website or reliance on information provided herein.</p>
 
-          <h2>Warranty</h2>
-          <p>
-            Products supplied are covered by the respective manufacturer&apos;s
-            warranty. Labour warranty periods are specified in the project
-            agreement. AMC contracts provide extended coverage as outlined in
-            the AMC agreement.
-          </p>
+          <h2>6. Governing Law</h2>
+          <p>These terms are governed by the laws of India. Any disputes shall be subject to the jurisdiction of courts in Navi Mumbai, Maharashtra.</p>
 
-          <h2>Limitation of Liability</h2>
-          <p>
-            {company.name} shall not be liable for any indirect, incidental, or
-            consequential damages arising from the use of our services beyond
-            the scope of the signed project agreement.
-          </p>
-
-          <h2>Intellectual Property</h2>
-          <p>
-            All content on this website, including text, design, and images, is
-            the property of {company.name} unless otherwise stated.
-          </p>
-
-          <h2>Contact</h2>
-          <p>
-            For any queries, contact us at{" "}
-            <a href={`mailto:${company.email}`}>{company.email}</a> or call{" "}
-            <a href={`tel:${company.mobile}`}>{company.mobile}</a>.
-          </p>
-        </article>
+          <h2>7. Contact</h2>
+          <p>For queries, contact <a href={`mailto:${company.email}`}>{company.email}</a>.</p>
+        </div>
       </div>
     </section>
   );
