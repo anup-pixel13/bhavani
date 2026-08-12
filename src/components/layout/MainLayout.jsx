@@ -20,11 +20,7 @@ export default function MainLayout() {
       <ScrollManager />
       <Header />
       <main className="app-main">
-        {!isHome && (
-          <div className="container">
-            <Breadcrumbs />
-          </div>
-        )}
+        {!isHome && <Breadcrumbs />}
         <Outlet />
       </main>
       <Footer />

@@ -1,14 +1,65 @@
-/* Home page section spacing & overrides */
+/* ── Hero ─────────────────────────────────────────────── */
 .home-hero {
-  padding: 4rem 0 2.5rem;
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-block: 5rem;
+  background: #0a0a1a; /* dark base so nothing bleeds through */
+    padding-block: 2.5rem 5rem; /* less on top, keep bottom */
+  
 }
 
-.home-section {
-  padding: 5rem 0;
+.home-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../../assets/images/hero/hero-bg.png");
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.45; /* raised from 0.18 */
+}
+/* 
+.home-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(79, 40, 220, 0.82) 0%,
+    rgba(20, 10, 60, 0.75) 45%,
+    rgba(10, 20, 80, 0.55) 100%
+  );
+  z-index: 1;
+} */
+
+.home-hero .container {
+  position: relative;
+  z-index: 2;
 }
 
-.home-section:nth-child(even) {
-  background: rgba(255, 255, 255, 0.5);
+/* Text on dark hero */
+.home-hero h1 {
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.home-hero p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.08rem;
+  max-width: 560px;
+}
+
+.home-hero .pill-label {
+  background: rgba(255, 255, 255, 0.12);
+  color: #c4b5fd;
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  backdrop-filter: blur(6px);
 }
 
 /* Intro stats row */
@@ -16,15 +67,16 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  background: var(--border);
+  background: rgba(255, 255, 255, 0.12);
   border-radius: var(--radius);
   overflow: hidden;
   margin-top: 2rem;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
 }
 
 .intro-stat {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.07);
   padding: 1.25rem;
   text-align: center;
 }
@@ -32,17 +84,46 @@
 .intro-stat strong {
   display: block;
   font-size: 1.6rem;
-  color: var(--primary);
   font-weight: 800;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .intro-stat span {
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 @media (max-width: 600px) {
   .intro-stats {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Rest of home sections ────────────────────────────── */
+.home-section {
+  padding-block: 4rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
 }

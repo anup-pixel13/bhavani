@@ -4,6 +4,20 @@ import { navigation } from "../../data/navigation";
 import { company } from "../../data/company";
 import "../../styles/layout/header.css";
 
+// Icon map keyed by nav path
+const NAV_ICONS = {
+  "/":              "🏠",
+  "/about":         "ℹ️",
+  "/services":      "🔧",
+  "/solutions":     "💡",
+  "/products":      "📦",
+  "/brands":        "🏷️",
+  "/clients":       "🤝",
+  "/installations": "📷",
+  "/service-areas": "📍",
+  "/contact":       "✉️",
+};
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const closeMenu = () => setOpen(false);
@@ -34,7 +48,10 @@ export default function Header() {
               }
               end={item.path === "/"}
             >
-              {item.label}
+              <span className="nav-icon" aria-hidden="true">
+                {NAV_ICONS[item.path] || "🔗"}
+              </span>
+              <span>{item.label}</span>
             </NavLink>
           ))}
         </nav>

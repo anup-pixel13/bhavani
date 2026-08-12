@@ -1,6 +1,8 @@
 .breadcrumbs {
-  padding: 0.65rem 0 0;
-  margin-bottom: 1.5rem;
+  padding: 0.5rem var(--container-padding, 1.5rem) 0;
+  max-width: var(--container-max, 1200px);
+  margin: 0 auto;
+  margin-bottom: 0; /* gap removed — page sections handle their own top padding */
 }
 
 .breadcrumbs__list {

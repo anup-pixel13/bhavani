@@ -3,7 +3,7 @@ import { useSEO } from "../hooks/useSEO";
 import { company } from "../data/company";
 import { buildWhatsAppUrl } from "../utils/whatsapp";
 import BackButton from "../components/common/BackButton";
-import "../styles/pages/get-quote.css";
+import "../styles/pages/quote.css";
 
 export default function GetQuote() {
   useSEO(
