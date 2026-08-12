@@ -1,0 +1,32 @@
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
+  backdrop-filter: blur(4px);
+  margin-bottom: 1.25rem;
+}
+
+.back-btn:hover,
+.back-btn:focus-visible {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  outline: none;
+}
+
+.back-btn:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
