@@ -1,0 +1,72 @@
+/* Enquiry page — shares form styles from quote.css via globals */
+@import "./quote.css";
+
+.enquiry-page .section-heading h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+.enquiry-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.enquiry-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.enquiry-contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.enquiry-contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.enquiry-contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(29,34,80,0.12);
+}
+
+.enquiry-contact-card span:first-child {
+  font-size: 1.5rem;
+}
+
+.enquiry-contact-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.enquiry-contact-card strong {
+  font-size: 0.92rem;
+}
+
+.enquiry-contact-card span:last-child {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.enquiry-form-wrap {
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .enquiry-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

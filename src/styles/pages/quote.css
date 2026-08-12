@@ -1,0 +1,177 @@
+.quote-page .section-heading h1 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+}
+
+.quote-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.quote-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quote-info h1 {
+  margin-top: 0.5rem;
+}
+
+.quote-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.quote-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.quote-benefits li span {
+  color: #25d366;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.quote-form-wrap {
+  padding: 2rem;
+}
+
+/* Shared form styles (used by both quote and enquiry) */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.9);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--transition);
+  width: 100%;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--primary);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-field-error {
+  font-size: 0.82rem;
+  color: #d93025;
+  font-weight: 500;
+}
+
+.form-error-msg {
+  background: rgba(217,48,37,0.08);
+  border: 1px solid rgba(217,48,37,0.3);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  color: #d93025;
+  margin-bottom: 1rem;
+}
+
+.form-field--checkbox {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.checkbox-label input {
+  width: auto;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.form-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
+}
+
+.form-success__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-success h2 {
+  margin: 0;
+}
+
+.form-success p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .quote-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
