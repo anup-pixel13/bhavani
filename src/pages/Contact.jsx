@@ -1,9 +1,15 @@
+import { useSEO } from "../hooks/useSEO";
 import { company } from "../data/company";
 import BackButton from "../components/common/BackButton";
 import { Link } from "react-router-dom";
 import "../styles/pages/contact.css";
 
 export default function Contact() {
+  useSEO(
+    "Contact Us",
+    `Contact Bhavani Enterprises for CCTV installation, networking, and security solutions in Navi Mumbai. Call ${company.mobile} or WhatsApp us for a free quote.`
+  );
+
   return (
     <section className="page-section contact-page">
       <div className="container">
@@ -25,7 +31,6 @@ export default function Contact() {
                 <span>{company.mobile}</span>
               </div>
             </a>
-
             <a href={`mailto:${company.email}`} className="contact-card card">
               <span className="contact-card__icon" aria-hidden="true">✉️</span>
               <div>
@@ -33,7 +38,6 @@ export default function Contact() {
                 <span>{company.email}</span>
               </div>
             </a>
-
             <a
               href={`https://wa.me/${company.whatsapp}`}
               target="_blank"
@@ -46,7 +50,6 @@ export default function Contact() {
                 <span>Chat instantly</span>
               </div>
             </a>
-
             <div className="contact-card card contact-card--address">
               <span className="contact-card__icon" aria-hidden="true">📍</span>
               <div>
@@ -62,7 +65,7 @@ export default function Contact() {
             <div className="contact-cta-image-wrap">
               <img
                 src="/src/assets/images/common/contact-handshake.jpg"
-                alt="Professional business handshake representing Bhavani Enterprises partnership"
+                alt="Professional business handshake"
                 className="contact-cta-image"
                 onError={(e) => { e.currentTarget.style.display = "none"; }}
               />

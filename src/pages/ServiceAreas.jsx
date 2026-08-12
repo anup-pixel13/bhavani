@@ -1,9 +1,15 @@
+import { useSEO } from "../hooks/useSEO";
 import { serviceAreas } from "../data/serviceAreas";
 import BackButton from "../components/common/BackButton";
 import { Link } from "react-router-dom";
 import "../styles/pages/service-areas.css";
 
 export default function ServiceAreas() {
+  useSEO(
+    "Service Areas",
+    "Bhavani Enterprises provides CCTV installation, networking, and security services across Navi Mumbai, Panvel, Kharghar, Mumbai, and Jaipur. Fast on-site response."
+  );
+
   return (
     <section className="page-section service-areas-page">
       <div className="container">
@@ -13,7 +19,7 @@ export default function ServiceAreas() {
           <h1>Where We Operate</h1>
           <p>
             We provide prompt, professional security and networking services
-            across the entire Navi Mumbai and Panvel belt — with local
+            across the entire Navi Mumbai and Panvel belt &mdash; with local
             expertise and rapid on-site response.
           </p>
         </div>
