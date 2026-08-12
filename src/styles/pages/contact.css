@@ -1,19 +1,111 @@
-.page-section {
-  padding: 4rem 0;
+.contact-page .section-heading h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
 }
 
-.contact-grid {
+.contact-layout {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-top: 1.5rem;
 }
 
-.contact-page p {
-  margin: 0.35rem 0;
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(29, 34, 80, 0.12);
+}
+
+.contact-card__icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contact-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.contact-card strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.contact-card span {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.contact-card--whatsapp {
+  border-color: rgba(37, 211, 102, 0.35);
+}
+
+.contact-card--address {
+  cursor: default;
+}
+
+.contact-card--address:hover {
+  transform: none;
+}
+
+.contact-cta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-cta-image-wrap {
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 300px;
+  background: linear-gradient(135deg, rgba(49,86,255,0.1), rgba(36,167,255,0.08));
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.contact-cta-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-cta-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.contact-cta-actions .btn {
+  flex: 1;
+  justify-content: center;
+  min-width: 140px;
 }
 
 @media (max-width: 768px) {
-  .contact-grid {
+  .contact-layout {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .contact-cta-actions .btn {
+    flex: none;
+    width: 100%;
   }
 }
