@@ -1,8 +1,14 @@
+import { useSEO } from "../hooks/useSEO";
 import { company } from "../data/company";
 import BackButton from "../components/common/BackButton";
 import "../styles/pages/about.css";
 
 export default function About() {
+  useSEO(
+    "About Us",
+    `Bhavani Enterprises — established ${company.established}, providing trusted CCTV, networking, and security solutions across Navi Mumbai, Panvel, and Kharghar. Learn about our team, values, and expertise.`
+  );
+
   return (
     <section className="page-section about-page">
       <div className="container">
@@ -35,23 +41,13 @@ export default function About() {
             <p>
               Our team of certified technicians brings years of hands-on
               expertise across residential, commercial, and government projects
-              — ensuring every installation meets the highest professional
+              &mdash; ensuring every installation meets the highest professional
               standards.
             </p>
-
             <div className="about-pillars">
-              <div className="about-pillar">
-                <strong>Quality</strong>
-                <span>Premium-grade products</span>
-              </div>
-              <div className="about-pillar">
-                <strong>Trust</strong>
-                <span>Government-approved work</span>
-              </div>
-              <div className="about-pillar">
-                <strong>Service</strong>
-                <span>24/7 support &amp; AMC</span>
-              </div>
+              <div className="about-pillar"><strong>Quality</strong><span>Premium-grade products</span></div>
+              <div className="about-pillar"><strong>Trust</strong><span>Government-approved work</span></div>
+              <div className="about-pillar"><strong>Service</strong><span>24/7 support &amp; AMC</span></div>
             </div>
           </div>
         </div>
@@ -62,9 +58,9 @@ export default function About() {
         </div>
         <div className="card" style={{ maxWidth: 480, padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.65rem" }}>
           <p><strong>{company.name}</strong></p>
-          <p>📞 <a href={`tel:${company.mobile}`} style={{ color: "var(--primary)" }}>{company.mobile}</a></p>
-          <p>✉️ <a href={`mailto:${company.email}`} style={{ color: "var(--primary)" }}>{company.email}</a></p>
-          <p>📍 {company.address.full}</p>
+          <p>&#128222; <a href={`tel:${company.mobile}`} style={{ color: "var(--primary)" }}>{company.mobile}</a></p>
+          <p>&#9993;&#65039; <a href={`mailto:${company.email}`} style={{ color: "var(--primary)" }}>{company.email}</a></p>
+          <p>&#128205; {company.address.full}</p>
           <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>GST: {company.gst} &nbsp;|&nbsp; PAN: {company.pan}</p>
         </div>
       </div>
