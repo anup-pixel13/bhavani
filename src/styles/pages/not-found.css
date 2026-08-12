@@ -1,0 +1,17 @@
+.page-section {
+  padding: 4rem 0;
+}
+
+.not-found-inner {
+  min-height: 50vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.not-found-inner h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  margin: 0;
+}
