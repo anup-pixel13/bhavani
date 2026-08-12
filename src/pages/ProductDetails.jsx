@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { products } from "../data/products";
 import { buildWhatsAppUrl } from "../utils/whatsapp";
 import { company } from "../data/company";
+import { useSEO } from "../hooks/useSEO";
 import BackButton from "../components/common/BackButton";
 import "../styles/pages/product-details.css";
 
@@ -9,15 +10,22 @@ export default function ProductDetails() {
   const { slug } = useParams();
   const product = products.find((p) => p.slug === slug);
 
+  useSEO(
+    product ? product.name : "Product Not Found",
+    product
+      ? `${product.name} — ${product.shortDescription}. Available from Bhavani Enterprises, Navi Mumbai.`
+      : "Product not found."
+  );
+
   if (!product) {
     return (
       <section className="page-section">
         <div className="container">
           <BackButton fallback="/products" />
-          <div className="product-not-found">
+          <div className="section-heading">
             <h1>Product Not Found</h1>
             <p>The product you are looking for does not exist or may have been removed.</p>
-            <Link to="/products" className="btn">Browse All Products</Link>
+            <Link to="/products" className="btn" style={{ marginTop: "1rem" }}>Back to Products</Link>
           </div>
         </div>
       </section>
@@ -30,75 +38,43 @@ export default function ProductDetails() {
     <section className="page-section product-details-page">
       <div className="container">
         <BackButton fallback="/products" />
-
-        <div className="product-details-grid">
-          {/* Image */}
+        <div className="product-details-layout">
           <div className="product-details__image-wrap">
             <img
               src={product.image}
               alt={product.name}
               className="product-details__image"
-              onError={(e) => {
-                e.currentTarget.style.display = "none";
-                e.currentTarget.nextElementSibling.style.display = "flex";
-              }}
+              onError={(e) => { e.currentTarget.style.display = "none"; }}
             />
-            <div className="product-details__image-fallback" style={{ display: "none" }}>
-              <span>&#128247;</span>
-            </div>
           </div>
-
-          {/* Info */}
           <div className="product-details__info">
             <span className="pill-label">{product.category}</span>
             <h1 className="product-details__name">{product.name}</h1>
-            <p className="product-details__desc">{product.description}</p>
-
             <p className="product-details__price">{product.priceLabel}</p>
+            <p className="product-details__desc">{product.description || product.shortDescription}</p>
 
-            {product.features && product.features.length > 0 && (
-              <ul className="product-details__features">
-                {product.features.map((f) => (
-                  <li key={f}>
-                    <span className="feature-check" aria-hidden="true">&#10003;</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+            {product.specs && product.specs.length > 0 && (
+              <div className="product-details__specs">
+                <h2>Specifications</h2>
+                <ul>
+                  {product.specs.map((spec) => (
+                    <li key={spec.label}>
+                      <span className="spec-label">{spec.label}</span>
+                      <span className="spec-value">{spec.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
 
             <div className="product-details__actions">
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn"
-              >
-                Enquire on WhatsApp
+              <a href={waUrl} target="_blank" rel="noopener noreferrer" className="btn btn--whatsapp">
+                &#128172; WhatsApp Enquiry
               </a>
-              <Link to="/get-quote" className="btn btn--outline">
-                Request a Quote
-              </Link>
+              <Link to="/get-quote" className="btn btn--outline">Get a Quote</Link>
             </div>
           </div>
         </div>
-
-        {/* Specifications table */}
-        {product.specifications && product.specifications.length > 0 && (
-          <div className="product-specs">
-            <h2 className="product-specs__title">Specifications</h2>
-            <table className="product-specs__table">
-              <tbody>
-                {product.specifications.map((spec) => (
-                  <tr key={spec.key}>
-                    <th scope="row">{spec.key}</th>
-                    <td>{spec.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
       </div>
     </section>
   );

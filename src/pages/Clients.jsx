@@ -1,3 +1,4 @@
+import { useSEO } from "../hooks/useSEO";
 import { clients } from "../data/clients";
 import BackButton from "../components/common/BackButton";
 import { Link } from "react-router-dom";
@@ -10,6 +11,11 @@ const TYPE_ICONS = {
 };
 
 export default function Clients() {
+  useSEO(
+    "Clients",
+    "Bhavani Enterprises is trusted by government bodies and leading private developers across Navi Mumbai and Panvel for CCTV, networking, and security installations."
+  );
+
   return (
     <section className="page-section clients-page">
       <div className="container">
@@ -19,11 +25,10 @@ export default function Clients() {
           <h1>Trusted by Government &amp; Private Sector</h1>
           <p>
             We are proud to serve some of the most prominent civic bodies and
-            developers in the region — a testament to our reliability and
+            developers in the region &mdash; a testament to our reliability and
             professional standards.
           </p>
         </div>
-
         <div className="clients-grid">
           {clients.map((client) => (
             <article key={client.id} className="client-card card">
@@ -41,7 +46,6 @@ export default function Clients() {
             </article>
           ))}
         </div>
-
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
           <Link to="/contact" className="btn">Work With Us</Link>
         </div>

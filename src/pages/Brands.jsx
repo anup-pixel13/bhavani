@@ -1,8 +1,14 @@
+import { useSEO } from "../hooks/useSEO";
 import { brands } from "../data/brands";
 import BackButton from "../components/common/BackButton";
 import "../styles/pages/brands.css";
 
 export default function Brands() {
+  useSEO(
+    "Brands",
+    "Bhavani Enterprises installs products from industry-leading brands including Hikvision, Dahua, CP Plus, D-Link, and more. Trusted across Navi Mumbai, Panvel, and Kharghar."
+  );
+
   return (
     <section className="page-section brands-page">
       <div className="container">
@@ -12,11 +18,10 @@ export default function Brands() {
           <h1>We Work with Industry-Leading Brands</h1>
           <p>
             Every installation uses products from globally trusted manufacturers
-            — ensuring performance, warranty backing, and long-term reliability
-            for our clients.
+            &mdash; ensuring performance, warranty backing, and long-term
+            reliability for our clients.
           </p>
         </div>
-
         <div className="brands-grid">
           {brands.map((brand) => (
             <article key={brand.id} className="brand-card card">
