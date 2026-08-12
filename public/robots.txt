@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Block private/utility paths
+Disallow: /get-quote
+Disallow: /enquiry
+
+# Allow important public pages explicitly
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /solutions
+Allow: /products
+Allow: /brands
+Allow: /clients
+Allow: /installations
+Allow: /service-areas
+Allow: /contact
+Allow: /privacy-policy
+Allow: /terms
+
+Sitemap: https://bhavanienterprises.in/sitemap.xml
