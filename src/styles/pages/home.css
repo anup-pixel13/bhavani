@@ -1,0 +1,48 @@
+/* Home page section spacing & overrides */
+.home-hero {
+  padding: 4rem 0 2.5rem;
+}
+
+.home-section {
+  padding: 5rem 0;
+}
+
+.home-section:nth-child(even) {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Intro stats row */
+.intro-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 2rem;
+  border: 1px solid var(--border);
+}
+
+.intro-stat {
+  background: rgba(255, 255, 255, 0.82);
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.intro-stat strong {
+  display: block;
+  font-size: 1.6rem;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.intro-stat span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+  .intro-stats {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,178 @@
+/* ============================================
+   HEADER
+   ============================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(246, 244, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(29, 34, 80, 0.06);
+}
+
+.header-inner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+/* Brand / Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.brand-text strong {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.brand-text small {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Nav */
+.site-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background: rgba(49, 86, 255, 0.09);
+  color: var(--text);
+}
+
+.nav-link.active {
+  background: rgba(49, 86, 255, 0.12);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* CTA button in header */
+.header-cta {
+  flex-shrink: 0;
+  padding: 0.5rem 1.1rem;
+  min-height: 40px;
+  font-size: 0.88rem;
+}
+
+/* Hamburger toggle */
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.menu-toggle:hover {
+  background: rgba(49, 86, 255, 0.08);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 999px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* Mobile menu */
+@media (max-width: 900px) {
+  .header-cta {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .site-nav {
+    position: absolute;
+    top: 72px;
+    left: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 16px 48px rgba(29, 34, 80, 0.14);
+    border: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity var(--transition), transform var(--transition);
+    z-index: 50;
+  }
+
+  .site-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+  }
+}
