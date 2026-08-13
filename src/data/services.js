@@ -7,7 +7,7 @@ export const services = [
     description:
       "We design and install tailored CCTV systems — from single-camera homes to multi-site corporate setups. Every installation is professionally calibrated for optimal coverage, and we provide scheduled maintenance to keep your system performing at its best.",
     icon: "camera",
-    image: "/src/assets/images/services/cctv-installation.jpg",
+    image: "/src/assets/images/services/cctv-installation.png",
     features: [
       "HD & 4K camera support",
       "Indoor and outdoor installation",

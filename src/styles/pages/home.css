@@ -1,14 +1,12 @@
-/* ── Hero ─────────────────────────────────────────────── */
+/* ── Hero ──────────────────────────────────────────────── */
 .home-hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-block: 5rem;
-  background: #0a0a1a; /* dark base so nothing bleeds through */
-    padding-block: 2.5rem 5rem; /* less on top, keep bottom */
-  
+  padding-block: 2rem 4rem;
+  background: #0a0a1a;
 }
 
 .home-hero::before {
@@ -20,49 +18,48 @@
   background-position: center right;
   background-repeat: no-repeat;
   z-index: 0;
-  opacity: 0.45; /* raised from 0.18 */
+  opacity: 0.45;
 }
-/* 
-.home-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(79, 40, 220, 0.82) 0%,
-    rgba(20, 10, 60, 0.75) 45%,
-    rgba(10, 20, 80, 0.55) 100%
-  );
-  z-index: 1;
-} */
+
+/* .home-hero::after — kept commented per your preference */
 
 .home-hero .container {
   position: relative;
   z-index: 2;
 }
 
-/* Text on dark hero */
+.hero-content {
+  max-width: 620px;
+}
+
 .home-hero h1 {
   color: #fff;
   font-size: clamp(2rem, 5vw, 3.4rem);
-  line-height: 1.15;
-  margin-bottom: 1rem;
+  line-height: 1.12;
+  margin: 0.75rem 0 1rem;
 }
 
 .home-hero p {
   color: rgba(255, 255, 255, 0.82);
-  font-size: 1.08rem;
-  max-width: 560px;
+  font-size: 1.05rem;
+  max-width: 540px;
+  line-height: 1.7;
 }
 
 .home-hero .pill-label {
   background: rgba(255, 255, 255, 0.12);
   color: #c4b5fd;
   border: 1px solid rgba(196, 181, 253, 0.35);
-  backdrop-filter: blur(6px);
 }
 
-/* Intro stats row */
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* ── Stats ──────────────────────────────────────────────── */
 .intro-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -70,14 +67,15 @@
   background: rgba(255, 255, 255, 0.12);
   border-radius: var(--radius);
   overflow: hidden;
-  margin-top: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-top: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
+  max-width: 560px;
 }
 
 .intro-stat {
-  background: rgba(255, 255, 255, 0.07);
-  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1.1rem;
   text-align: center;
 }
 
@@ -92,38 +90,488 @@
 }
 
 .intro-stat span {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.15rem;
+  display: block;
+}
+
+/* ── Section themes ─────────────────────────────────────── */
+.home-section {
+  padding-block: 3.5rem;
+}
+
+/* YOUR colours — untouched */
+.home-section--light {
+  background: linear-gradient(
+    135deg,
+    rgba(79, 40, 220, 0.82) 0%,
+    rgba(20, 10, 60, 0.75) 45%,
+    rgb(128, 255, 255) 100%
+  );
+}
+
+/* Force readable text on the gradient light sections */
+.home-section--light .section-heading h2 {
+  color: #fff;
+}
+
+.home-section--light .section-heading p {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.home-section--light .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.home-section--dark {
+  background: rgb(0, 0, 98);
+}
+
+.home-section--dark .section-heading h2,
+.home-section--dark h2 {
+  color: #fff;
+}
+
+.home-section--dark .section-heading p {
   color: rgba(255, 255, 255, 0.65);
+}
+
+.home-section--cta {
+  background: linear-gradient(135deg, #4f28dc 0%, #1e3a8a 60%, #312e81 100%);
+  padding-block: 4rem;
+}
+
+/* Pills on dark bg */
+.pill-label--light {
+  background: rgba(167, 139, 250, 0.2);
+  color: #c4b5fd;
+  border: 1px solid rgba(196, 181, 253, 0.3);
+}
+
+/* Section CTA row */
+.section-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Outline btn on light gradient bg */
+.home-section--light .btn--outline {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+}
+
+.home-section--light .btn--outline:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* CTA section buttons */
+.btn--glass {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  box-shadow: none;
+}
+
+.btn--glass:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.btn--outline-white {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  box-shadow: none;
+}
+
+.btn--outline-white:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Parallax sections ──────────────────────────────────── */
+.parallax-section {
+  position: relative;
+  height: 220px;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.parallax-section--1 {
+  background-image:
+    linear-gradient(rgba(10, 10, 30, 0.55), rgba(10, 10, 30, 0.55)),
+    url("../../assets/images/hero/p1-bg.png");
+}
+
+.parallax-section--2 {
+  background-image:
+    linear-gradient(rgba(10, 10, 30, 0.55), rgba(10, 10, 30, 0.55)),
+    url("../../assets/images/hero/p2-bg.png");
+}
+
+.parallax-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parallax-content {
+  text-align: center;
+}
+
+.parallax-tagline {
+  font-size: clamp(1.1rem, 3vw, 1.65rem);
+  font-weight: 700;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Service cards ──────────────────────────────────────── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.service-card__icon {
+  width: 100%;
+  height: 130px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.service-card__icon img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  display: block;
+}
+
+.service-card__icon--placeholder {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Placeholder text — only shows if img fails or is missing */
+.service-card__icon::after {
+  content: "IMG";
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  position: absolute;
+}
+
+.service-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.service-card__desc {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── Client cards dark ──────────────────────────────────── */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card--dark {
+  background: rgb(128, 128, 128);
+  border-color: rgba(167, 139, 250, 0.2);
+}
+
+.card--dark .client-card__name {
+  color: rgb(0, 0, 0);
+}
+
+.card--dark .client-card__type {
+  color: rgb(0, 128, 0);
+}
+
+.client-card__check {
+  color: #a78bfa;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Brand cards ────────────────────────────────────────── */
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+/* ── Brand cards ────────────────────────────────────────── */
+.brand-card__image-wrap {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.brand-card__image {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Placeholder only shown when no image */
+.brand-card__image-wrap--placeholder::after {
+  content: "LOGO";
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+
+
+.brand-card__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.brand-card__tagline {
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.brand-card__desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Reviews section ────────────────────────────────────── */
+.reviews-section {
+  overflow: hidden;
+}
+
+/* Header row: heading + rating badge side by side */
+.reviews-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* Google rating badge (like pest-o-rid style) */
+.reviews-rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fff;
+  border-radius: 50px;
+  padding: 0.6rem 1.2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.reviews-rating-badge__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.reviews-rating-badge__stars {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.reviews-rating-badge__score {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Scrolling track */
+.reviews-track-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews-track {
+  display: flex;
+  gap: 1.25rem;
+  animation: scrollReviews 32s linear infinite;
+  width: max-content;
+}
+
+.reviews-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollReviews {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Individual review card — matches pest-o-rid style */
+.review-card {
+  width: 320px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.review-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Avatar circle with initials */
+.review-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f28dc, #1e3a8a);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+
+.review-card__meta-top {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.review-card__google-icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.review-name {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.review-location {
+  font-size: 0.75rem;
+  color: rgba(196, 181, 253, 0.7);
+}
+
+.review-stars {
+  display: flex;
+  gap: 0.1rem;
+}
+
+.star { color: rgba(255,255,255,0.15); font-size: 1rem; }
+.star--filled { color: #fbbf24; }
+
+.review-quote-mark {
+  font-size: 2rem;
+  line-height: 1;
+  color: rgba(167, 139, 250, 0.35);
+  font-family: Georgia, serif;
+  margin: 0;
+}
+
+.review-text {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+}
+
+.review-date {
+  font-size: 0.75rem;
+  color: rgba(196, 181, 253, 0.5);
+  margin-top: 0.25rem;
+}
+
+/* Fade edges */
+.reviews-fade-left,
+.reviews-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.reviews-fade-left {
+  left: 0;
+  background: linear-gradient(to right, rgb(0, 0, 98), transparent);
+}
+
+.reviews-fade-right {
+  right: 0;
+  background: linear-gradient(to left, rgb(0, 0, 98), transparent);
+}
+
+/* ── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .reviews-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 600px) {
   .intro-stats {
     grid-template-columns: 1fr;
+    max-width: 100%;
   }
-}
 
-/* ── Rest of home sections ────────────────────────────── */
-.home-section {
-  padding-block: 4rem;
-}
+  .parallax-section {
+    background-attachment: scroll;
+    height: 160px;
+  }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-
-.clients-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.brands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.25rem;
-  margin-top: 2rem;
+  .home-section {
+    padding-block: 2.5rem;
+  }
 }
