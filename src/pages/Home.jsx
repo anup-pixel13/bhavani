@@ -8,16 +8,16 @@ import { reviews } from "../data/reviews";
 import { buildWhatsAppUrl } from "../utils/whatsapp";
 import "../styles/pages/home.css";
 
-import imgCctv     from "../assets/images/services/cctv.png";
-import imgIpCamera from "../assets/images/services/ip-camera.png";
-import imgNetworking from "../assets/images/services/networking.png";
-import imgBiometric from "../assets/images/services/biometric.png";
-import imgVideoDoor from "../assets/images/services/video-door.png";
-import imgAmc       from "../assets/images/services/amc.png";
+import imgCctv        from "../assets/images/services/cctv.png";
+import imgIpCamera    from "../assets/images/services/ip-camera.png";
+import imgNetworking  from "../assets/images/services/networking.png";
+import imgBiometric   from "../assets/images/services/biometric.png";
+import imgVideoDoor   from "../assets/images/services/video-door.png";
+import imgAmc         from "../assets/images/services/amc.png";
 
-import imgCpplus    from "../assets/images/brands/cpplus.png";
-import imgHikvision from "../assets/images/brands/hikvision.png";
-import imgDahua     from "../assets/images/brands/dahua.png";
+import imgCpplus      from "../assets/images/brands/cpplus.png";
+import imgHikvision   from "../assets/images/brands/hikvision.png";
+import imgDahua       from "../assets/images/brands/dahua.png";
 
 const SERVICE_IMAGES = {
   "cctv":             imgCctv,
@@ -101,18 +101,31 @@ export default function Home() {
             <h2>What We Do</h2>
             <p>End-to-end security and networking solutions tailored for homes, businesses, and government projects.</p>
           </div>
-          <div className="services-grid">
-            {services.slice(0, 6).map((s) => (
-              <article key={s.id} className="service-card card">
-                {SERVICE_IMAGES[s.id] ? (
-                  <div className="service-card__icon">
-                    <img src={SERVICE_IMAGES[s.id]} alt={s.title} />
-                  </div>
-                ) : (
-                  <div className="service-card__icon service-card__icon--placeholder" aria-hidden="true" />
-                )}
-                <h3 className="service-card__title">{s.title}</h3>
-                <p className="service-card__desc">{s.description}</p>
+          <div className="home-services-grid">
+            {services.slice(0, 4).map((s) => (
+              <article key={s.id} className="home-service-card">
+                <div className="home-service-card__image-wrap">
+                  {SERVICE_IMAGES[s.id] ? (
+                    <img
+                      src={SERVICE_IMAGES[s.id]}
+                      alt={s.title}
+                      className="home-service-card__image"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                        e.currentTarget.nextElementSibling.style.display = "flex";
+                      }}
+                    />
+                  ) : null}
+                  <div
+                    className="home-service-card__image-fallback"
+                    style={{ display: SERVICE_IMAGES[s.id] ? "none" : "flex" }}
+                    aria-hidden="true"
+                  >📷</div>
+                </div>
+                <div className="home-service-card__body">
+                  <h3 className="home-service-card__title">{s.title}</h3>
+                  <p className="home-service-card__desc">{s.shortDescription}</p>
+                </div>
               </article>
             ))}
           </div>
@@ -175,17 +188,19 @@ export default function Home() {
           </div>
           <div className="brands-grid">
             {brands.slice(0, 3).map((b) => (
-              <article key={b.id} className="brand-card card">
-                {BRAND_IMAGES[b.id] ? (
-                  <div className="brand-card__image-wrap">
-                    <img src={BRAND_IMAGES[b.id]} alt={`${b.name} logo`} />
-                  </div>
-                ) : (
-                  <div className="brand-card__image-wrap brand-card__image-wrap--placeholder" aria-hidden="true" />
-                )}
-                <h3 className="brand-card__name">{b.name}</h3>
-                <span className="brand-card__tagline">{b.tagline}</span>
-                <p className="brand-card__desc">{b.description}</p>
+              <article key={b.id} className="home-brand-card">
+                <div className="home-brand-card__logo-wrap">
+                  {BRAND_IMAGES[b.id] ? (
+                    <img src={BRAND_IMAGES[b.id]} alt={`${b.name} logo`} className="home-brand-card__logo" />
+                  ) : (
+                    <div className="home-brand-card__logo-placeholder" aria-hidden="true">LOGO</div>
+                  )}
+                </div>
+                <div className="home-brand-card__body">
+                  <h3 className="home-brand-card__name">{b.name}</h3>
+                  <span className="home-brand-card__tagline">{b.tagline}</span>
+                  <p className="home-brand-card__desc">{b.description}</p>
+                </div>
               </article>
             ))}
           </div>

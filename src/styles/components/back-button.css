@@ -15,7 +15,8 @@
     color var(--transition),
     border-color var(--transition);
   backdrop-filter: blur(4px);
-  margin-bottom: 1.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .back-btn:hover,
@@ -29,4 +30,18 @@
 .back-btn:focus-visible {
   outline: 3px solid var(--primary);
   outline-offset: 3px;
+}
+
+/* ── Dark page variant ────────────────────────────────────── */
+.back-btn--dark {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.back-btn--dark:hover,
+.back-btn--dark:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
 }

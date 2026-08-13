@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../../styles/components/back-button.css";
 
-export default function BackButton({ fallback = "/" }) {
+export default function BackButton({ fallback = "/", dark = false }) {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -16,7 +16,7 @@ export default function BackButton({ fallback = "/" }) {
     <button
       type="button"
       onClick={handleBack}
-      className="back-btn"
+      className={`back-btn${dark ? " back-btn--dark" : ""}`}
       aria-label="Go back"
     >
       <svg

@@ -18,6 +18,9 @@ const LABELS = {
   terms: "Terms & Conditions",
 };
 
+// Pages that have a dark background — breadcrumb text should be light
+const DARK_BG_PAGES = ["/about"];
+
 function toLabel(segment) {
   return LABELS[segment] ?? segment
     .split("-")
@@ -30,7 +33,6 @@ export default function Breadcrumbs() {
 
   const segments = pathname.split("/").filter(Boolean);
 
-  // Don't render on home page
   if (segments.length === 0) return null;
 
   const crumbs = [
@@ -41,7 +43,8 @@ export default function Breadcrumbs() {
     })),
   ];
 
-  // JSON-LD structured data
+  const isDark = DARK_BG_PAGES.some((p) => pathname.startsWith(p));
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -59,7 +62,10 @@ export default function Breadcrumbs() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav aria-label="Breadcrumb" className="breadcrumbs">
+      <nav
+        aria-label="Breadcrumb"
+        className={`breadcrumbs${isDark ? " breadcrumbs--dark" : ""}`}
+      >
         <ol className="breadcrumbs__list">
           {crumbs.map((crumb, i) => {
             const isLast = i === crumbs.length - 1;

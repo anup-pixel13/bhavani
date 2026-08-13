@@ -77,8 +77,17 @@ img {
   flex: 1;
 }
 
+/* Dark page background for app-main (e.g. About, Services pages) */
+.app-main--dark {
+  background: #050a28;
+}
+
 /* ── Shared components ──────────────────────────────── */
-.page-section,
+.page-section {
+  padding-bottom: 4rem;
+  padding-top: 0.5rem;
+}
+
 .home-section {
   padding: 4rem 0;
 }

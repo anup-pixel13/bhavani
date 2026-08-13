@@ -21,8 +21,6 @@
   opacity: 0.45;
 }
 
-/* .home-hero::after — kept commented per your preference */
-
 .home-hero .container {
   position: relative;
   z-index: 2;
@@ -101,17 +99,15 @@
   padding-block: 3.5rem;
 }
 
-/* YOUR colours — untouched */
 .home-section--light {
   background: linear-gradient(
     135deg,
-    rgba(79, 40, 220, 0.82) 0%,
+    rgb(0, 64, 128) 0%,
     rgba(20, 10, 60, 0.75) 45%,
-    rgb(128, 255, 255) 100%
+    rgb(16, 2, 57) 100%
   );
 }
 
-/* Force readable text on the gradient light sections */
 .home-section--light .section-heading h2 {
   color: #fff;
 }
@@ -144,27 +140,23 @@
   padding-block: 4rem;
 }
 
-/* ── FIX: pill-label--light — visible on dark blue bg ───── */
 .pill-label--light {
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
   border: 2px solid rgba(255, 255, 255, 0.6);
 }
 
-/* ── FIX: "GET STARTED" pill on CTA dark gradient ────────── */
 .home-section--cta .pill-label {
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
   border: 2px solid rgba(255, 255, 255, 0.6);
 }
 
-/* Section CTA row */
 .section-cta {
   text-align: center;
   margin-top: 2rem;
 }
 
-/* Outline btn on light gradient bg */
 .home-section--light .btn--outline {
   background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.7);
@@ -175,7 +167,6 @@
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* ── FIX: CTA buttons visible on dark gradient bg ─────────── */
 .btn--glass {
   background: rgba(255, 255, 255, 0.22);
   border: 2px solid rgba(255, 255, 255, 0.75);
@@ -243,59 +234,96 @@
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* ── Service cards ──────────────────────────────────────── */
-.services-grid {
+/* ── Home service cards (liquid glass, scoped) ──────────── */
+.home-services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
   margin-top: 1.5rem;
 }
 
-.service-card__icon {
-  width: 100%;
-  height: 130px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px dashed rgba(255, 255, 255, 0.2);
+.home-service-card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.home-service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
+}
+
+.home-service-card__image-wrap {
+  width: 110px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(10, 20, 60, 0.6), rgba(20, 40, 100, 0.4));
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
   overflow: hidden;
 }
 
-.service-card__icon img {
-  width: 85%;
-  height: 85%;
+.home-service-card__image {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  padding: 0.75rem;
   display: block;
 }
 
-.service-card__icon--placeholder {
-  background: rgba(255, 255, 255, 0.05);
+.home-service-card__image-fallback {
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
-/* Placeholder text — only shows if img fails or is missing */
-.service-card__icon::after {
-  content: "IMG";
-  font-size: 0.55rem;
-  color: rgba(255, 255, 255, 0.4);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  position: absolute;
+.home-service-card__body {
+  padding: 1.1rem 1.1rem 1.1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
 }
 
-.service-card__title {
+.home-service-card__title {
   font-size: 1rem;
   font-weight: 700;
-  margin-bottom: 0.4rem;
-  color: var(--text);
+  color: #fff;
+  margin: 0;
 }
 
-.service-card__desc {
-  font-size: 0.88rem;
-  color: var(--text);
+.home-service-card__desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.72);
   line-height: 1.6;
+  margin: 0;
 }
 
 /* ── Client cards dark ──────────────────────────────────── */
@@ -306,7 +334,6 @@
   margin-top: 1.5rem;
 }
 
-/* ── FIX: card--dark — white bg for contrast + full 4-side border ── */
 .card--dark {
   background: rgba(255, 255, 255, 0.92);
   border: 3px solid rgba(167, 139, 250, 0.65);
@@ -327,62 +354,101 @@
   margin-bottom: 0.5rem;
 }
 
-/* ── Brand cards (Home page) ────────────────────────────── */
+/* ── Brand cards (Home page, liquid glass, scoped) ──────── */
 .brands-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
   margin-top: 1.5rem;
 }
 
-.brand-card__image-wrap {
+.home-brand-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.home-brand-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-brand-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.3);
+}
+
+.home-brand-card__logo-wrap {
   width: 100%;
   aspect-ratio: 16 / 7;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 1.5rem;
-  overflow: hidden;
-  border-radius: 12px;
   background: #fff;
+  padding: 0.75rem 1.25rem;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-.brand-card__image-wrap img {
+.home-brand-card__logo {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* Placeholder only shown when no image */
-.brand-card__image-wrap--placeholder::after {
-  content: "LOGO";
-  font-size: 0.55rem;
-  color: rgba(255, 255, 255, 0.35);
+.home-brand-card__logo-placeholder {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.4);
   font-weight: 700;
   letter-spacing: 0.08em;
 }
 
-.brand-card__name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
+.home-brand-card__body {
+  padding: 1rem 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-.brand-card__tagline {
-  font-size: 0.8rem;
-  color: var(--primary);
+.home-brand-card__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.home-brand-card__tagline {
+  font-size: 0.78rem;
+  color: #a78bfa;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  display: block;
-  margin-bottom: 0.5rem;
 }
 
-.brand-card__desc {
-  font-size: 0.88rem;
-  color: var(--text-muted);
+.home-brand-card__desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
+  margin: 0;
 }
 
 /* ── Reviews section ────────────────────────────────────── */
@@ -390,7 +456,6 @@
   overflow: hidden;
 }
 
-/* Header row: heading + rating badge side by side */
 .reviews-header {
   display: flex;
   align-items: flex-start;
@@ -400,7 +465,6 @@
   margin-bottom: 2rem;
 }
 
-/* Google rating badge (like pest-o-rid style) */
 .reviews-rating-badge {
   display: flex;
   align-items: center;
@@ -430,7 +494,6 @@
   color: #374151;
 }
 
-/* Scrolling track */
 .reviews-track-wrap {
   position: relative;
   overflow: hidden;
@@ -452,7 +515,6 @@
   100% { transform: translateX(-50%); }
 }
 
-/* Individual review card — matches pest-o-rid style */
 .review-card {
   width: 320px;
   flex-shrink: 0;
@@ -471,7 +533,6 @@
   gap: 0.75rem;
 }
 
-/* Avatar circle with initials */
 .review-avatar {
   width: 42px;
   height: 42px;
@@ -540,7 +601,6 @@
   margin-top: 0.25rem;
 }
 
-/* Fade edges */
 .reviews-fade-left,
 .reviews-fade-right {
   position: absolute;
@@ -567,6 +627,9 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  .brands-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 600px) {
@@ -582,5 +645,18 @@
 
   .home-section {
     padding-block: 2.5rem;
+  }
+
+  .home-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-service-card {
+    flex-direction: column;
+  }
+
+  .home-service-card__image-wrap {
+    width: 100%;
+    height: 120px;
   }
 }

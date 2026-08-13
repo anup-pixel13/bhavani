@@ -6,13 +6,13 @@ import "../styles/pages/about.css";
 export default function About() {
   useSEO(
     "About Us",
-    `Bhavani Enterprises — established ${company.established}, providing trusted CCTV, networking, and security solutions across Navi Mumbai, Panvel, and Kharghar. Learn about our team, values, and expertise.`
+    `Bhavani Enterprises — established ${company.established}, providing trusted CCTV, networking, and security solutions across Navi Mumbai, Panvel, and Kharghar. Learn about our team, values, and commitment to security excellence.`
   );
 
   return (
     <section className="page-section about-page">
       <div className="container">
-        <BackButton fallback="/" />
+        <BackButton fallback="/" dark />
         <div className="section-heading">
           <span className="pill-label">About Us</span>
           <h1>Trusted. Experienced. Reliable.</h1>
@@ -56,12 +56,13 @@ export default function About() {
           <span className="pill-label">Contact Details</span>
           <h2>Reach Us</h2>
         </div>
-        <div className="card" style={{ maxWidth: 480, padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+
+        <div className="about-contact-card">
           <p><strong>{company.name}</strong></p>
-          <p>&#128222; <a href={`tel:${company.mobile}`} style={{ color: "var(--primary)" }}>{company.mobile}</a></p>
-          <p>&#9993;&#65039; <a href={`mailto:${company.email}`} style={{ color: "var(--primary)" }}>{company.email}</a></p>
+          <p>&#128222; <a href={`tel:${company.mobile}`}>{company.mobile}</a></p>
+          <p>&#9993;&#65039; <a href={`mailto:${company.email}`}>{company.email}</a></p>
           <p>&#128205; {company.address.full}</p>
-          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>GST: {company.gst} &nbsp;|&nbsp; PAN: {company.pan}</p>
+          <p className="about-contact-muted">GST: {company.gst} &nbsp;|&nbsp; PAN: {company.pan}</p>
         </div>
       </div>
     </section>

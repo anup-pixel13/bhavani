@@ -1,8 +1,9 @@
 .breadcrumbs {
-  padding: 0.5rem var(--container-padding, 1.5rem) 0;
+  padding: 0.35rem var(--container-padding, 1.5rem) 0;
   max-width: var(--container-max, 1200px);
   margin: 0 auto;
-  margin-bottom: 0; /* gap removed — page sections handle their own top padding */
+  margin-bottom: 0;
+  background: transparent;
 }
 
 .breadcrumbs__list {
@@ -41,4 +42,21 @@
 .breadcrumbs__current {
   color: var(--text-muted);
   font-weight: 500;
+}
+
+/* ── Dark page variant ────────────────────────────────────── */
+.breadcrumbs--dark .breadcrumbs__link {
+  color: rgba(196, 181, 253, 0.9);
+}
+
+.breadcrumbs--dark .breadcrumbs__link:hover {
+  color: #fff;
+}
+
+.breadcrumbs--dark .breadcrumbs__sep {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.breadcrumbs--dark .breadcrumbs__current {
+  color: rgba(255, 255, 255, 0.6);
 }
