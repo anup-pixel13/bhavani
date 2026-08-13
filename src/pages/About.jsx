@@ -21,7 +21,7 @@ export default function About() {
         <div className="about-intro">
           <div className="about-intro__image-wrap">
             <img
-              src="/src/assets/images/services/cctv-installation.jpg"
+              src="/src/assets/images/hero/trust.png"
               alt="Bhavani Enterprises technician installing a CCTV camera"
               className="about-intro__image"
               onError={(e) => { e.currentTarget.style.display = "none"; }}
