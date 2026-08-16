@@ -51,8 +51,8 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-
-        {/* Services */}
+{/*
+        { Services }
         <div className="footer-col">
           <h4>Services</h4>
           <ul className="footer-links">
@@ -62,7 +62,7 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-        </div>
+        </div>*/}
 
         {/* Contact */}
         <div className="footer-col">

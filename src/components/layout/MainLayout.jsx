@@ -6,8 +6,11 @@ import ScrollToTop from "../common/ScrollToTop";
 import Breadcrumbs from "../common/Breadcrumbs";
 import { useScrollRestoration } from "../../hooks/useScrollRestoration";
 
-// Pages with a dark background — app-main bg + breadcrumbs must match
-const DARK_BG_PAGES = ["/about", "/services"];
+const DARK_BG_PAGES = [
+  "/about", "/services", "/solutions", "/products",
+  "/brands", "/clients", "/installations", "/service-areas",
+  "/contact", "/get-quote", "/enquiry",
+];
 
 function ScrollManager() {
   useScrollRestoration();
@@ -20,16 +23,19 @@ export default function MainLayout() {
   const isDark = DARK_BG_PAGES.some((p) => location.pathname.startsWith(p));
 
   return (
-    <div className="app-shell">
+    <>
       <ScrollManager />
-      <Header />
-      <main className={`app-main${isDark ? " app-main--dark" : ""}`}>
-        {!isHome && <Breadcrumbs />}
-        <Outlet />
-      </main>
-      <Footer />
-      <WhatsAppButton />
-      <ScrollToTop />
-    </div>
+      {isDark && <div className="site-bg" aria-hidden="true" />}
+      <div className="app-shell">
+        <Header />
+        <main className={`app-main${isDark ? " app-main--dark" : ""}`}>
+          {!isHome && <Breadcrumbs />}
+          <Outlet />
+        </main>
+        <Footer />
+        <WhatsAppButton />
+        <ScrollToTop />
+      </div>
+    </>
   );
 }

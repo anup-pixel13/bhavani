@@ -1,93 +1,148 @@
-.clients-page .section-heading h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
+/* ── Page background ──────────────────────────────────────── */
+.clients-page {
+  padding: 0.25rem 0 4rem;
+  position: relative;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(135deg, rgba(5, 10, 40, 0.82) 0%, rgba(10, 20, 60, 0.75) 60%, rgba(5, 15, 50, 0.88) 100%),
+    url("../../assets/images/hero/services-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
-.clients-grid {
+/* ── Heading ──────────────────────────────────────────────── */
+.clients-page .section-heading h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
+.clients-page .section-heading p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.clients-page .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
+.clients-page .clients-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
   margin-top: 2rem;
 }
 
-.client-card {
+/* ── Card — liquid glass + gradient border ────────────────── */
+.clients-page .client-card {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.88);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   transition: transform var(--transition), box-shadow var(--transition);
-  position: relative;
   overflow: hidden;
+  border: none;
 }
 
-.client-card::after {
+/* Gradient border */
+.clients-page .client-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Left accent bar */
+.clients-page .client-card::after {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(to bottom, var(--primary), var(--accent));
+  background: linear-gradient(to bottom, #a78bfa, #34d399);
   border-radius: 3px 0 0 3px;
+  z-index: 2;
 }
 
-.client-card:hover {
+.clients-page .client-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 20px 48px rgba(29, 34, 80, 0.13);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
 }
 
-.client-card__check {
-  width: 36px;
-  height: 36px;
+/* ── Icon circle ──────────────────────────────────────────── */
+.clients-page .client-card__check {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: rgba(49, 86, 255, 0.1);
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-size: 1rem;
-  color: var(--primary);
-  font-weight: 700;
+  font-size: 1.1rem;
 }
 
-.client-card__body {
+/* ── Card body ───────────────────────────────────────────── */
+.clients-page .client-card__body {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  flex: 1;
 }
 
-.client-card__name {
+.clients-page .client-card__name {
   font-size: 1rem;
   font-weight: 700;
   margin: 0;
   line-height: 1.3;
+  color: #fff;
 }
 
-.client-card__type {
-  font-size: 0.78rem;
-  color: var(--primary);
+.clients-page .client-card__type {
+  font-size: 0.75rem;
+  color: #a78bfa;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
 }
 
-.client-card__location {
+.clients-page .client-card__location {
   font-size: 0.82rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.client-card__desc {
+.clients-page .client-card__desc {
   font-size: 0.88rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
   margin: 0;
 }
 
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .clients-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .clients-page .clients-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
 @media (max-width: 540px) {
-  .clients-grid { grid-template-columns: 1fr; }
+  .clients-page .clients-grid { grid-template-columns: 1fr; }
 }

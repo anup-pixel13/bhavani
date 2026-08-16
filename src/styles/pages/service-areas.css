@@ -1,7 +1,34 @@
-.service-areas-page .section-heading h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
+/* ── Page background ──────────────────────────────────────── */
+.service-areas-page {
+  padding: 0.25rem 0 4rem;
+  position: relative;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(135deg, rgba(5, 10, 40, 0.82) 0%, rgba(10, 20, 60, 0.75) 60%, rgba(5, 15, 50, 0.88) 100%),
+    url("../../assets/images/hero/services-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
+/* ── Heading ──────────────────────────────────────────────── */
+.service-areas-page .section-heading h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
+.service-areas-page .section-heading p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.service-areas-page .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ── Hero layout ──────────────────────────────────────────── */
 .service-areas-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -11,78 +38,142 @@
   margin-bottom: 3rem;
 }
 
-.service-areas-hero__image-wrap {
+.service-areas-hero__text p {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.8;
+  font-size: 1.02rem;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Map embed ────────────────────────────────────────────── */
+.service-areas-hero__map-wrap {
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
-  min-height: 320px;
-  background: linear-gradient(135deg, rgba(49,86,255,0.12), rgba(36,167,255,0.1));
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  height: 340px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
-.service-areas-hero__image {
+/* Gradient border */
+.service-areas-hero__map-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.service-areas-hero__map {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: none;
+  display: block;
+  border-radius: var(--radius);
+  filter: invert(90%) hue-rotate(180deg); /* dark map to match theme */
 }
 
+/* ── Area cards grid ──────────────────────────────────────── */
 .areas-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
 }
 
+/* ── Card — liquid glass ──────────────────────────────────── */
 .area-card {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.88);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   transition: transform var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+  border: none;
 }
 
+/* Gradient border */
+.area-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Highlight card — slightly brighter */
 .area-card--highlight {
-  border-color: rgba(49, 86, 255, 0.4);
+  background: rgba(167, 139, 250, 0.12);
 }
 
 .area-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 20px 48px rgba(29, 34, 80, 0.13);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
 }
 
+/* ── Icon circle ──────────────────────────────────────────── */
 .area-card__check {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: rgba(49, 86, 255, 0.1);
+  background: rgba(167, 139, 250, 0.18);
+  border: 1px solid rgba(167, 139, 250, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--primary);
+  color: #a78bfa;
   font-weight: 700;
+  font-size: 1rem;
+}
+
+.area-card--highlight .area-card__check {
+  background: rgba(52, 211, 153, 0.18);
+  border-color: rgba(52, 211, 153, 0.4);
+  color: #34d399;
 }
 
 .area-card__name {
   font-size: 1rem;
   font-weight: 700;
   margin: 0 0 0.3rem;
+  color: #fff;
 }
 
 .area-card__desc {
   font-size: 0.88rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.68);
   line-height: 1.6;
   margin: 0;
 }
 
+/* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 900px) {
   .service-areas-hero { grid-template-columns: 1fr; }
+  .service-areas-hero__map-wrap { height: 280px; }
   .areas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
 @media (max-width: 540px) {
   .areas-grid { grid-template-columns: 1fr; }
 }

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import "../styles/pages/clients.css";
 
 const TYPE_ICONS = {
-  Government: "🏛️",
-  "Private / Builder": "🏠",
+  "Government":               "🏛️",
+  "Private / Builder":        "🏠",
   "Private / Infrastructure": "🏗️",
 };
 
@@ -19,7 +19,7 @@ export default function Clients() {
   return (
     <section className="page-section clients-page">
       <div className="container">
-        <BackButton fallback="/" />
+        <BackButton fallback="/" dark />
         <div className="section-heading">
           <span className="pill-label">Our Clients</span>
           <h1>Trusted by Government &amp; Private Sector</h1>
@@ -29,9 +29,10 @@ export default function Clients() {
             professional standards.
           </p>
         </div>
+
         <div className="clients-grid">
           {clients.map((client) => (
-            <article key={client.id} className="client-card card">
+            <article key={client.id} className="client-card">
               <div className="client-card__check" aria-hidden="true">
                 {TYPE_ICONS[client.type] || "✓"}
               </div>
@@ -46,8 +47,9 @@ export default function Clients() {
             </article>
           ))}
         </div>
+
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
-          <Link to="/contact" className="btn">Work With Us</Link>
+          <Link to="/contact" className="btn btn--glass">Work With Us</Link>
         </div>
       </div>
     </section>

@@ -1,7 +1,26 @@
-.installations-page .section-heading h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
+/* ── Page background ──────────────────────────────────────── */
+.installations-page {
+  padding: 0.25rem 0 4rem;
+  position: relative;
+  min-height: 100vh;
 }
 
+.installations-page .section-heading h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
+.installations-page .section-heading p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.installations-page .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ── Category filter ──────────────────────────────────────── */
 .installations-categories {
   display: flex;
   flex-wrap: wrap;
@@ -9,6 +28,32 @@
   margin-bottom: 1.5rem;
 }
 
+.installations-categories .cat-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.installations-categories .cat-btn:hover {
+  border-color: rgba(167, 139, 250, 0.7);
+  color: #fff;
+  background: rgba(167, 139, 250, 0.15);
+}
+
+.installations-categories .cat-btn--active {
+  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  border-color: transparent;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
 .installations-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -16,6 +61,7 @@
   margin-bottom: 2rem;
 }
 
+/* ── Card ─────────────────────────────────────────────────── */
 .installation-card {
   position: relative;
   border-radius: var(--radius);
@@ -23,26 +69,44 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3;
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.installation-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .installation-card:hover,
 .installation-card:focus-visible {
   transform: translateY(-4px);
-  box-shadow: 0 24px 55px rgba(29,34,80,0.18);
-  outline: 3px solid var(--primary);
-  outline-offset: 3px;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.4);
+  outline: none;
 }
 
 .installation-card__image-wrap {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(49,86,255,0.12), rgba(36,167,255,0.1));
+  position: absolute;
+  inset: 0;
 }
 
 .installation-card__image {
@@ -50,20 +114,70 @@
   height: 100%;
   object-fit: cover;
   transition: transform 500ms ease;
+  display: block;
 }
 
 .installation-card:hover .installation-card__image {
   transform: scale(1.06);
 }
 
-.installation-card__fallback {
+.installation-card__placeholder {
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
-  color: var(--text-muted);
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(10, 20, 60, 0.8), rgba(20, 40, 100, 0.6));
+}
+
+.installation-card__placeholder span:first-child {
+  font-size: 2.5rem;
+  opacity: 0.6;
+}
+
+.installation-card__placeholder span:last-child {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.installation-card__play-badge {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.installation-card__play-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.installation-card:hover .installation-card__play-btn {
+  background: rgba(167, 139, 250, 0.4);
+  transform: scale(1.1);
+}
+
+.installation-card__play-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  margin-left: 3px;
 }
 
 .installation-card__overlay {
@@ -71,115 +185,255 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(29,34,80,0.85), transparent);
+  padding: 0.85rem 1rem;
+  background: linear-gradient(to top, rgba(5, 10, 40, 0.92), transparent);
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  color: #fff;
-  text-align: left;
+  gap: 0.15rem;
+  z-index: 3;
 }
 
 .installation-card__category {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.85;
+  letter-spacing: 0.06em;
+  color: #a78bfa;
 }
 
 .installation-card__title {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
+  color: #fff;
   line-height: 1.3;
+  margin: 0;
 }
 
-.installations-empty {
-  text-align: center;
-  color: var(--text-muted);
-  padding: 3rem 0;
+.installation-card__location {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.55);
 }
 
-/* Lightbox */
+/* ── Lightbox backdrop ────────────────────────────────────── */
 .lightbox-backdrop {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(10, 10, 30, 0.82);
-  backdrop-filter: blur(6px);
+  background: rgba(3, 7, 30, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  /* no padding — modal handles its own safe area */
+  padding: 0;
+  overflow: hidden;
+  animation: lb-fade-in 0.2s ease;
 }
 
+@keyframes lb-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Lightbox modal ───────────────────────────────────────── */
 .lightbox-modal {
   position: relative;
-  background: rgba(255,255,255,0.97);
+  width: min(860px, 92vw);
+  /* key: cap height to viewport minus navbar, enable internal scroll */
+  max-height: calc(100vh - 80px);
+  margin-top: 70px; /* clear navbar */
   border-radius: var(--radius);
-  max-width: 780px;
-  width: 100%;
-  overflow: hidden;
-  box-shadow: 0 32px 80px rgba(10,10,30,0.4);
+  background: rgba(10, 18, 60, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  overflow-y: auto;   /* scroll INSIDE the modal if content is tall */
+  overflow-x: hidden;
+  animation: lb-slide-up 0.22s ease;
+  /* hide scrollbar visually but keep it functional */
+  scrollbar-width: none;
 }
 
-.lightbox-close {
+.lightbox-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.lightbox-modal::before {
+  content: "";
   position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes lb-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Close button ─────────────────────────────────────────── */
+.lightbox-close {
+  position: sticky;    /* sticks to top of modal when scrolled */
   top: 0.75rem;
-  right: 0.75rem;
-  width: 36px;
-  height: 36px;
+  float: right;
+  margin: 0.75rem 0.75rem 0 0;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.9);
-  font-size: 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 1.2rem;
   cursor: pointer;
-  z-index: 2;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.lightbox-close:hover {
+  background: rgba(167, 139, 250, 0.35);
+  border-color: rgba(167, 139, 250, 0.6);
+}
+
+/* ── Nav arrows ───────────────────────────────────────────── */
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 30%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background var(--transition);
 }
 
-.lightbox-close:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
+.lightbox-prev { left: 0.75rem; }
+.lightbox-next { right: 0.75rem; }
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: rgba(167, 139, 250, 0.3);
+  border-color: rgba(167, 139, 250, 0.5);
 }
 
+.lightbox-prev:disabled,
+.lightbox-next:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* ── Media ────────────────────────────────────────────────── */
 .lightbox-image {
   width: 100%;
-  max-height: 460px;
-  object-fit: cover;
+  max-height: calc(100vh - 280px); /* viewport minus navbar + info panel */
+  object-fit: contain;
   display: block;
+  background: #000;
 }
 
-.lightbox-info {
-  padding: 1.25rem 1.5rem 1.5rem;
+.lightbox-video {
+  width: 100%;
+  max-height: calc(100vh - 280px);
+  display: block;
+  background: #000;
+}
+
+.lightbox-media-placeholder {
+  width: 100%;
+  height: 280px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(135deg, rgba(10, 20, 60, 0.8), rgba(20, 40, 100, 0.6));
 }
 
-.lightbox-info h2 {
-  font-size: 1.3rem;
-  margin: 0.4rem 0 0;
+.lightbox-media-placeholder span:first-child {
+  font-size: 3.5rem;
+  opacity: 0.5;
 }
 
-.lightbox-info p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
+.lightbox-media-placeholder span:last-child {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+}
+
+/* ── Info panel ───────────────────────────────────────────── */
+.lightbox-info {
+  padding: 1.1rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.lightbox-info__category {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a78bfa;
+}
+
+.lightbox-info__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .installations-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.lightbox-info__location {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.lightbox-info__desc {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.lightbox-counter {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.25rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .installations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 480px) {
-  .installations-grid {
-    grid-template-columns: 1fr;
+  .installations-grid { grid-template-columns: 1fr; }
+  .lightbox-modal {
+    margin-top: 60px;
+    max-height: calc(100vh - 65px);
   }
+  .lightbox-prev { left: 0.25rem; }
+  .lightbox-next { right: 0.25rem; }
 }

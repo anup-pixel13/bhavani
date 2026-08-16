@@ -1,15 +1,46 @@
-.contact-page .section-heading h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
+/* ── Page background ──────────────────────────────────────── */
+.contact-page {
+  padding: 0.25rem 0 4rem;
+  position: relative;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(135deg, rgba(5, 10, 40, 0.82) 0%, rgba(10, 20, 60, 0.75) 60%, rgba(5, 15, 50, 0.88) 100%),
+    url("../../assets/images/hero/services-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
+/* ── Heading ──────────────────────────────────────────────── */
+.contact-page .section-heading h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
+.contact-page .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.contact-page .section-heading .contact-tagline {
+  color: #a78bfa;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
 .contact-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: start;
   margin-top: 1.5rem;
 }
 
+/* ── Contact info cards ───────────────────────────────────── */
 .contact-cards {
   display: flex;
   flex-direction: column;
@@ -17,18 +48,42 @@
 }
 
 .contact-card {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
   text-decoration: none;
-  color: var(--text);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   transition: transform var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+  border: none;
+}
+
+/* Gradient border */
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .contact-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(29, 34, 80, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
 
 .contact-card__icon {
@@ -46,18 +101,25 @@
 .contact-card strong {
   font-size: 0.95rem;
   font-weight: 700;
+  color: #fff;
 }
 
 .contact-card span {
   font-size: 0.88rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.65);
   line-height: 1.5;
 }
 
-.contact-card--whatsapp {
-  border-color: rgba(37, 211, 102, 0.35);
+/* WhatsApp card accent */
+.contact-card--whatsapp::before {
+  background: linear-gradient(135deg, #25d366, #128c7e);
 }
 
+.contact-card--whatsapp strong {
+  color: #4ade80;
+}
+
+/* Address card — not clickable */
 .contact-card--address {
   cursor: default;
 }
@@ -66,27 +128,47 @@
   transform: none;
 }
 
-.contact-cta-col {
+/* ── Right column: map + CTA ──────────────────────────────── */
+.contact-map-col {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
-.contact-cta-image-wrap {
+/* ── Map embed ────────────────────────────────────────────── */
+.contact-map-wrap {
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
-  min-height: 300px;
-  background: linear-gradient(135deg, rgba(49,86,255,0.1), rgba(36,167,255,0.08));
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  height: 340px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
-.contact-cta-image {
+.contact-map-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact-map {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: none;
+  display: block;
+  border-radius: var(--radius);
 }
 
+/* ── CTA buttons ──────────────────────────────────────────── */
 .contact-cta-actions {
   display: flex;
   gap: 0.75rem;
@@ -99,11 +181,24 @@
   min-width: 140px;
 }
 
+.contact-page .btn--outline {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(167, 139, 250, 0.6);
+  color: #c4b5fd;
+}
+
+.contact-page .btn--outline:hover {
+  background: rgba(167, 139, 250, 0.2);
+  color: #fff;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
   .contact-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .contact-map-wrap { height: 260px; }
   .contact-cta-actions .btn {
     flex: none;
     width: 100%;

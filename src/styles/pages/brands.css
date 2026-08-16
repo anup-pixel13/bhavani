@@ -1,84 +1,165 @@
-.brands-page .section-heading h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
+/* ── Page background ──────────────────────────────────────── */
+.brands-page {
+  padding: 0.25rem 0 4rem;
+  position: relative;
+  min-height: 100vh;
 }
 
-.brands-grid {
+/* ── Heading ──────────────────────────────────────────────── */
+.brands-page .section-heading h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+
+.brands-page .section-heading p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.brands-page .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
+.brands-page .brands-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25rem;
   margin-top: 2rem;
 }
 
-.brand-card {
+/* ── Card — liquid glass + gradient border ────────────────── */
+.brands-page .brand-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding: 1.75rem 1.5rem;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(49, 86, 255, 0.2);
+  padding: 0 0 1.5rem;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
   transition: transform var(--transition), box-shadow var(--transition);
+  border: none;
 }
 
-.brand-card:hover {
+.brands-page .brand-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.brands-page .brand-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 24px 55px rgba(29, 34, 80, 0.13);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.35);
 }
 
-.brand-card__image-wrap {
+/* ── Logo area — white bg so logos render correctly ─────── */
+.brands-page .brand-card__image-wrap {
   width: 100%;
   aspect-ratio: 16 / 7;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
+  border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0;
+  padding: 1rem 1.75rem;
   box-sizing: border-box;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
-.brand-card__image {
+.brands-page .brand-card__image {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.brand-card__name {
+/* ── Placeholder (no logo yet) ────────────────────────────── */
+.brands-page .brand-card__image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(96, 165, 250, 0.1));
+}
+
+.brands-page .brand-card__image-placeholder span:first-child {
+  font-size: 2.5rem;
+}
+
+.brands-page .brand-card__image-placeholder span:last-child {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Card body ───────────────────────────────────────────── */
+.brands-page .brand-card__body {
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.brands-page .brand-card__name {
   font-size: 1.15rem;
   font-weight: 700;
   margin: 0;
+  color: #fff;
 }
 
-.brand-card__tagline {
+.brands-page .brand-card__tagline {
   font-size: 0.82rem;
-  color: var(--primary);
+  color: #a78bfa;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
 
-.brand-card__category {
+.brands-page .brand-card__category {
   display: inline-block;
   font-size: 0.78rem;
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
-  background: rgba(49, 86, 255, 0.1);
-  color: var(--primary);
+  background: rgba(167, 139, 250, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  color: #c4b5fd;
   font-weight: 500;
+  width: fit-content;
 }
 
-.brand-card__desc {
+.brands-page .brand-card__desc {
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
   margin: 0;
 }
 
+/* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .brands-page .brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
 @media (max-width: 540px) {
-  .brands-grid { grid-template-columns: 1fr; }
+  .brands-page .brands-grid { grid-template-columns: 1fr; }
 }

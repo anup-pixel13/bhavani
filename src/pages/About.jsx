@@ -3,6 +3,8 @@ import { company } from "../data/company";
 import BackButton from "../components/common/BackButton";
 import "../styles/pages/about.css";
 
+import imgTrust from "../assets/images/hero/trust.png";
+
 export default function About() {
   useSEO(
     "About Us",
@@ -21,7 +23,7 @@ export default function About() {
         <div className="about-intro">
           <div className="about-intro__image-wrap">
             <img
-              src="/src/assets/images/hero/trust.png"
+              src={imgTrust}
               alt="Bhavani Enterprises technician installing a CCTV camera"
               className="about-intro__image"
               onError={(e) => { e.currentTarget.style.display = "none"; }}

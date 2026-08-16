@@ -1,59 +1,50 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
-/**
- * Generic pagination hook.
- *
- * @param {Array}  items        - Full array of items to paginate
- * @param {number} initialPerPage - Items per page (default 6)
- * @returns pagination state + helpers
- */
 export function usePagination(items = [], initialPerPage = 6) {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(initialPerPage);
   const listTopRef = useRef(null);
 
+  const pendingScrollRef = useRef(null); // "top" | "bottom" | null
+
   const totalPages = Math.max(1, Math.ceil(items.length / perPage));
-
-  // Clamp current page when perPage changes
   const safeCurrentPage = Math.min(currentPage, totalPages);
-
   const start = (safeCurrentPage - 1) * perPage;
   const pageItems = items.slice(start, start + perPage);
 
-  /**
-   * Scroll to the top of the product list (for Next / direct page clicks).
-   */
-  const scrollToListTop = useCallback(() => {
-    if (listTopRef.current) {
+  useEffect(() => {
+    if (!pendingScrollRef.current) return;
+
+    const action = pendingScrollRef.current;
+    pendingScrollRef.current = null;
+
+    if (!listTopRef.current) return;
+
+    if (action === "top") {
       listTopRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, []);
-
-  /**
-   * Scroll to near the bottom of the list / pagination controls
-   * (for Previous button clicks — rule: go to bottom of previous page).
-   */
-  const scrollToListBottom = useCallback(() => {
-    if (listTopRef.current) {
+    } else if (action === "bottom") {
       const el = listTopRef.current;
-      const rect = el.getBoundingClientRect();
-      const approxBottom = window.scrollY + rect.top + el.offsetHeight;
-      window.scrollTo({ top: approxBottom, behavior: "smooth" });
+      const gridBottom = el.getBoundingClientRect().bottom + window.scrollY;
+      const targetY = gridBottom - window.innerHeight + 40;
+      window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
     }
-  }, []);
+  });
 
+  // ── Used by pagination buttons — DOES scroll ──────────────
   const goToPage = useCallback(
     (page, direction = "forward") => {
       const clamped = Math.min(Math.max(1, page), totalPages);
       setCurrentPage(clamped);
-      if (direction === "prev") {
-        scrollToListBottom();
-      } else {
-        scrollToListTop();
-      }
+      pendingScrollRef.current = direction === "prev" ? "bottom" : "top";
     },
-    [totalPages, scrollToListTop, scrollToListBottom]
+    [totalPages]
   );
+
+  // ── Used by search / category filter — does NOT scroll ────
+  const resetToFirstPage = useCallback(() => {
+    setCurrentPage(1);
+    // intentionally no scroll
+  }, []);
 
   const next = useCallback(() => {
     goToPage(safeCurrentPage + 1, "forward");
@@ -63,14 +54,11 @@ export function usePagination(items = [], initialPerPage = 6) {
     goToPage(safeCurrentPage - 1, "prev");
   }, [safeCurrentPage, goToPage]);
 
-  const changePerPage = useCallback(
-    (n) => {
-      setPerPage(Number(n));
-      setCurrentPage(1);
-      scrollToListTop();
-    },
-    [scrollToListTop]
-  );
+  const changePerPage = useCallback((n) => {
+    setPerPage(Number(n));
+    setCurrentPage(1);
+    pendingScrollRef.current = "top";
+  }, []);
 
   return {
     currentPage: safeCurrentPage,
@@ -80,6 +68,7 @@ export function usePagination(items = [], initialPerPage = 6) {
     totalItems: items.length,
     listTopRef,
     goToPage,
+    resetToFirstPage,
     next,
     prev,
     changePerPage,

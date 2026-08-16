@@ -1,0 +1,39 @@
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/assets/backgrounds/site-bg.webp");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.site-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(5, 10, 40, 0.82) 0%,
+    rgba(10, 20, 60, 0.75) 60%,
+    rgba(5, 15, 50, 0.88) 100%
+  );
+}
+
+/* Mobile — keep fixed, just swap image. Never use position:absolute for bg */
+@media (max-width: 768px) {
+  .site-bg {
+    background-image: url("/assets/backgrounds/site-bg-mobile.webp");
+  }
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  flex: 1;
+}

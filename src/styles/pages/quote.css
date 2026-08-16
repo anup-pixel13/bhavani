@@ -1,177 +1,235 @@
-.quote-page .section-heading h1 {
+/* ── Page background ──────────────────────────────────────── */
+.get-quote-page {
+  padding: 0.25rem 0 4rem;
+  position: relative;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(135deg, rgba(5, 10, 40, 0.82) 0%, rgba(10, 20, 60, 0.75) 60%, rgba(5, 15, 50, 0.88) 100%),
+    url("../../assets/images/hero/services-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* ── Heading ──────────────────────────────────────────────── */
+.get-quote-page .section-heading h1 {
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: #fff;
 }
 
-.quote-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 3rem;
-  align-items: start;
-  margin-top: 1rem;
+.get-quote-page .section-heading p {
+  color: rgba(255, 255, 255, 0.75);
 }
 
-.quote-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.get-quote-page .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.quote-info h1 {
-  margin-top: 0.5rem;
+/* ── Form card — liquid glass ─────────────────────────────── */
+.quote-form {
+  position: relative;
+  max-width: 680px;
+  padding: 2rem 2rem 2.25rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: none;
 }
 
-.quote-benefits {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+/* Gradient border */
+.quote-form::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.quote-benefits li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  color: var(--text-muted);
-}
-
-.quote-benefits li span {
-  color: #25d366;
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-.quote-form-wrap {
-  padding: 2rem;
-}
-
-/* Shared form styles (used by both quote and enquiry) */
-.form-field {
+/* ── Form groups ──────────────────────────────────────────── */
+.form-group {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
 }
 
-.form-label {
-  font-size: 0.9rem;
+.form-group label {
+  font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text);
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.form-field input,
-.form-field select,
-.form-field textarea {
+.form-group label span[aria-hidden] {
+  color: #f87171;
+  margin-left: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
   padding: 0.65rem 1rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.9);
-  color: var(--text);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   font-size: 0.95rem;
   font-family: inherit;
   outline: none;
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), background var(--transition);
   width: 100%;
+  box-sizing: border-box;
 }
 
-.form-field input:focus,
-.form-field select:focus,
-.form-field textarea:focus {
-  border-color: var(--primary);
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
 }
 
-.form-field textarea {
+.form-group select option {
+  background: #0d1b4b;
+  color: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: rgba(167, 139, 250, 0.7);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Error state */
+.form-group input.input--error,
+.form-group select.input--error,
+.form-group textarea.input--error {
+  border-color: #f87171;
+}
+
+.form-group textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 110px;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.form-field-error {
-  font-size: 0.82rem;
-  color: #d93025;
-  font-weight: 500;
-}
-
-.form-error-msg {
-  background: rgba(217,48,37,0.08);
-  border: 1px solid rgba(217,48,37,0.3);
-  border-radius: 10px;
-  padding: 0.65rem 1rem;
-  font-size: 0.9rem;
-  color: #d93025;
-  margin-bottom: 1rem;
-}
-
-.form-field--checkbox {
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.checkbox-label {
+/* ── Character count ──────────────────────────────────────── */
+.form-group__meta {
   display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  line-height: 1.5;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.checkbox-label input {
-  width: auto;
-  margin-top: 2px;
-  flex-shrink: 0;
+.char-count {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: right;
 }
 
-.form-submit {
+.char-count--warn {
+  color: #fbbf24;
+}
+
+/* ── Inline field error ───────────────────────────────────── */
+.field-error {
+  font-size: 0.78rem;
+  color: #f87171;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ── Submit button ────────────────────────────────────────── */
+.quote-form .btn-submit {
   width: 100%;
   justify-content: center;
   margin-top: 0.5rem;
+  font-size: 1rem;
 }
 
-.form-success {
+/* ── Success state ────────────────────────────────────────── */
+.quote-success {
+  position: relative;
+  max-width: 680px;
+  padding: 3rem 2rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.75rem;
-  padding: 2rem 1rem;
+  gap: 0.85rem;
 }
 
-.form-success__icon {
-  width: 56px;
-  height: 56px;
+.quote-success::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #34d399, #60a5fa);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.quote-success__icon {
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: #25d366;
+  background: linear-gradient(135deg, #34d399, #059669);
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 20px rgba(52, 211, 153, 0.4);
 }
 
-.form-success h2 {
+.quote-success h2 {
+  color: #fff;
+  font-size: 1.5rem;
   margin: 0;
 }
 
-.form-success p {
-  color: var(--text-muted);
+.quote-success p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.97rem;
+  line-height: 1.6;
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .quote-layout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-  }
+.quote-success .btn {
+  margin-top: 0.5rem;
+}
+
+/* ── Shared form utilities (used by enquiry too) ──────────── */
+.form-field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.form-label { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-field-error { font-size: 0.82rem; color: #d93025; font-weight: 500; }
+.form-submit { width: 100%; justify-content: center; margin-top: 0.5rem; }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 540px) {
+  .quote-form,
+  .quote-success { padding: 1.5rem 1.25rem; }
 }

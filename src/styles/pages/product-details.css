@@ -1,40 +1,93 @@
+/* ── Page background — matches products/services dark theme ── */
 .product-details-page {
-  padding-top: 2rem;
+  padding: 0.25rem 0 4rem;
+  position: relative;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(135deg, rgba(5, 10, 40, 0.82) 0%, rgba(10, 20, 60, 0.75) 60%, rgba(5, 15, 50, 0.88) 100%),
+    url("../../assets/images/hero/services-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
-.product-details-grid {
+/* ── Pill label ───────────────────────────────────────────── */
+.product-details-page .pill-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+.product-details-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem;
   align-items: start;
+  margin-top: 1.5rem;
   margin-bottom: 3rem;
 }
 
+/* ── Image wrap — liquid glass ────────────────────────────── */
 .product-details__image-wrap {
+  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
   min-height: 320px;
-  background: linear-gradient(135deg, rgba(49,86,255,0.08), rgba(36,167,255,0.08));
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gradient border */
+.product-details__image-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .product-details__image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 1.5rem;
+  display: block;
 }
 
 .product-details__image-fallback {
   width: 100%;
   min-height: 320px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.75rem;
   font-size: 4rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.25);
 }
 
+.product-details__image-fallback span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ── Info panel ───────────────────────────────────────────── */
 .product-details__info {
   display: flex;
   flex-direction: column;
@@ -44,20 +97,22 @@
 .product-details__name {
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   margin: 0.5rem 0;
-}
-
-.product-details__desc {
-  color: var(--text-muted);
-  line-height: 1.75;
-  font-size: 1rem;
+  color: #fff;
 }
 
 .product-details__price {
   font-weight: 700;
   font-size: 1.05rem;
-  color: var(--primary);
+  color: #60a5fa;
 }
 
+.product-details__desc {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+/* ── Features list ────────────────────────────────────────── */
 .product-details__features {
   list-style: none;
   padding: 0;
@@ -72,15 +127,17 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .feature-check {
-  color: #25d366;
+  color: #34d399;
   font-weight: 700;
   font-size: 1rem;
   flex-shrink: 0;
 }
 
+/* ── Actions ──────────────────────────────────────────────── */
 .product-details__actions {
   display: flex;
   flex-wrap: wrap;
@@ -88,17 +145,48 @@
   margin-top: 0.5rem;
 }
 
+.product-details-page .btn--outline {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(167, 139, 250, 0.6);
+  color: #c4b5fd;
+}
+
+.product-details-page .btn--outline:hover {
+  background: rgba(167, 139, 250, 0.2);
+  color: #fff;
+}
+
+/* ── Specs card — liquid glass ────────────────────────────── */
 .product-specs {
-  background: rgba(255,255,255,0.75);
-  border: 1px solid var(--border);
+  position: relative;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-radius: var(--radius);
   padding: 1.5rem;
-  box-shadow: var(--shadow);
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.product-specs::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 2px;
+  background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .product-specs__title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
+  color: #fff;
 }
 
 .product-specs__table {
@@ -111,22 +199,33 @@
 .product-specs__table td {
   padding: 0.65rem 0.85rem;
   text-align: left;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .product-specs__table th {
   width: 35%;
-  color: var(--text-muted);
+  color: rgba(196, 181, 253, 0.85);
   font-weight: 600;
 }
 
+.product-specs__table td {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.product-specs__table tr:last-child th,
+.product-specs__table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Not found ────────────────────────────────────────────── */
 .product-not-found {
   text-align: center;
   padding: 4rem 1rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .product-not-found h1 {
+  color: #fff;
   margin-bottom: 1rem;
 }
 
@@ -134,8 +233,9 @@
   margin-bottom: 1.5rem;
 }
 
+/* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .product-details-grid {
+  .product-details-layout {
     grid-template-columns: 1fr;
   }
   .product-details__actions .btn {
